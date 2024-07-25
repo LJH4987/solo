@@ -22,10 +22,10 @@ public class App {
             /* ! = 부정하다 , sc.hasNextInt() = 입력받은 값이 정수인지
             * 콘솔에 정수가 아닌 입력을 받았을 때 오류 메시지를 출력하고 다시 입력받습니다.
             * 첫 번째 숫자 입력
-            * System.out.print("첫 번째 숫자 입력: ");
             * 입력받은 값이 정수가 아닌 경우 , !sc.hasNextInt()는 입력받은 값이 정수가 아닌 경우를 의미해요
             * !는 부정을 의미하고 sc.hasNextInt()는 입력받은 값이 정수인지 확인합니다!
             */
+            System.out.print("첫 번째 숫자 입력: ");  // 첫 번째 숫자 입력
             while (!sc.hasNextInt()) { // 입력받은 값이 정수가 아닌 경우
                 sc.next(); // 입력받은 값을 버림 , sc.next()는 입력받은 값을 버리는 메소드에요
                 System.out.println("숫자를 입력해주세요!"); // 오류 메시지 출력
@@ -98,8 +98,7 @@ public class App {
 
             } else if (exit.equals("inquiry")) { // foreach를 사용해 inquiry를 입력하면
                 for (int i : list) { // 리스트 배열에 저장된 값을 불러오기 위해 foreach문을 사용해요 i : list는 리스트 배열에 저장된 값을 i에 저장을 의미
-                    System.out.print("기록된 리스트: "); // 리스트 배열에 저장된 값을 불러주기위한 메세지
-                    System.out.print(i + " "); // 리스트 배열에 저장된 값을 출력해요 빈 스트링은 띄어쓰기를 위해 사용해요
+                    System.out.print("기록된 리스트 : " + i + " "); // 리스트 배열에 저장된 값을 출력해요 빈 스트링은 띄어쓰기를 위해 사용해요
                 }
                 System.out.println(); // 줄바꿈용
             }
