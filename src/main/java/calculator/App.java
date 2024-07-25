@@ -8,7 +8,7 @@ public class App {
     public static void main(String[] args) {
         // 연산 결과 10개를 저장할 수 있는 배열을 선언하고 연산의 결과를 저장합니다.
         // 인덱스 0 번부터이기 떄문에 9까지 배열을 생성합니다.
-        int[] arr = new int[9];
+        int[] arr = new int[10];
         // 무한 루프를 사용하여 빠져 나올 떄까지 계속 계산
         while (true) {
             // Scanner를 통하여 콘솔로부터 입력을 받습니다.
@@ -31,7 +31,7 @@ public class App {
             while (!sc.hasNextInt()) {
                 sc.next();
                 System.out.println("숫자를 입력해주세요!");
-                System.out.print("첫 번째 숫자 입력: ");
+                System.out.print("두 번째 숫자 입력: ");
 
             }
             int num2 = sc.nextInt();
@@ -68,6 +68,7 @@ public class App {
                 for (int i = 0; i < arr.length; i++) {
                     if (arr[i] != 0) {
                         System.out.print("인덱스" + "[" + i + "]" + "번" + " 저장 값: " + arr[i] + " ");
+                        System.out.println(); // 줄바꿈용
                     }
                 }
                 // 저장된 배열을 불러옴
@@ -76,9 +77,19 @@ public class App {
                         arr[i] = result;
                         System.out.println("새로 배열에 저정된 값: " + arr[i]);
                         break;
-                    } else if () {
-                        int error = -3;
+                    } else if (arr[i] == arr[9]) {
+                        error = -3; // 기존에 선언된 'error' 변수의 값을 업데이트합니다.error = -3;
                         System.out.println("배열 공간이 가득 찼습니다!");
+                        System.out.println("더 계산하시겠습니까?"+"현재 결과 값은 "+result+" 이며"+" 진행시 0번 인덱스 배열의 값은 삭제되고 순서대로 밀립니다. (exit 입력 시 종료)");
+                        // 아무키나 입력하면 계산을 계속 진행하고 0번 인덱스의 값은 사라지고 1번부터 밀림
+                        String exit = sc.next();
+                        if (exit.equals("exit")) {
+                            break;
+                        }
+                        for (int j = 0; j < arr.length - 1; j++) {
+                            arr[j] = arr[j + 1];
+                        }
+                        arr[9] = result;
                         break;
                     }
                 }
