@@ -17,8 +17,15 @@ public class App {
         System.out.print("두 번째 숫자 입력: ");
         int num2 = sc.nextInt();
 
-        // 입력받은 숫자를 출력
-        System.out.println("입력한 수 " + num1 + ", " + num2);
+        // 사칙연산 입력
+        System.out.print("사칙연산 입력(+, -, *, /): ");
+        char operator = sc.next().charAt(0);
 
+        System.out.println("operator = " + operator);
+
+
+
+        // Here, you would continue with your logic to perform the operation
     }
+    // No extra closing brace here
 }
