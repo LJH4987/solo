@@ -22,10 +22,10 @@ public class App {
             /* ! = 부정하다 , sc.hasNextInt() = 입력받은 값이 정수인지
             * 콘솔에 정수가 아닌 입력을 받았을 때 오류 메시지를 출력하고 다시 입력받습니다.
             * 첫 번째 숫자 입력
-            * System.out.print("첫 번째 숫자 입력: ");
             * 입력받은 값이 정수가 아닌 경우 , !sc.hasNextInt()는 입력받은 값이 정수가 아닌 경우를 의미해요
             * !는 부정을 의미하고 sc.hasNextInt()는 입력받은 값이 정수인지 확인합니다!
             */
+            System.out.print("첫 번째 숫자 입력: ");  // 첫 번째 숫자 입력
             while (!sc.hasNextInt()) { // 입력받은 값이 정수가 아닌 경우
                 sc.next(); // 입력받은 값을 버림 , sc.next()는 입력받은 값을 버리는 메소드에요
                 System.out.println("숫자를 입력해주세요!"); // 오류 메시지 출력
