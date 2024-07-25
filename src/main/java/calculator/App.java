@@ -76,6 +76,10 @@ public class App {
                         arr[i] = result;
                         System.out.println("새로 배열에 저정된 값: " + arr[i]);
                         break;
+                    } else if () {
+                        int error = -3;
+                        System.out.println("배열 공간이 가득 찼습니다!");
+                        break;
                     }
                 }
                 System.out.println("결과: " + result);
