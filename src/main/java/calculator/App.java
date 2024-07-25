@@ -24,8 +24,8 @@ public class App {
             System.out.print("첫 번째 숫자 입력: ");
             // 입력받은 값이 정수가 아닌 경우 , !sc.hasNextInt()는 입력받은 값이 정수가 아닌 경우를 의미해요
             // !는 부정을 의미하고 sc.hasNextInt()는 입력받은 값이 정수인지 확인합니다!
-            while (!sc.hasNextInt()) {
-                sc.next(); // 입력받은 값을 버림
+            while (!sc.hasNextInt()) { // 입력받은 값이 정수가 아닌 경우
+                sc.next(); // 입력받은 값을 버림 , sc.next()는 입력받은 값을 버리는 메소드에요
                 System.out.println("숫자를 입력해주세요!"); // 오류 메시지 출력
                 System.out.print("첫 번째 숫자 입력: "); // 다시 입력받기
                 //whil 반복문을 통해 숫자가 아닌 입력을 받았을 때 오류 메시지를 출력하고 다시 입력
@@ -76,17 +76,12 @@ public class App {
                 System.out.println("결과: " + result); // 결과 메세지와 함께 결과를 출력해요
             }
 
-            // 리스트 배열에 저장된 결과를 출력
-            System.out.print("기록된 리스트: "); // 리스트 배열에 저장된 값을 불러주기위한 메세지
-            for (int i = 0; i < list.size(); i++) { // 리스트를 루트하며 값을 출력 하기위함! 현재 리스트의 길이만큼 더해가며 반복합니다
-                System.out.print(list.get(i) + " "); // 리스트 배열에 저장된 값을 출력해요 루프를 통해서 get(i)를 통해 값을 불러오면서 빈 스트링을 통해 띄어쓰며 출력해요
-            }
-            System.out.println(); // 그냥 줄바꿈용
+            // 리스트 불러오기 명령어를 추가해서 삭제됌
 
             // 계산을 더 할 것인지 물어보고,더 하지 않는다면 exit를 입력하여 종료합니다.
             System.out.print("계속 계산하시겠습니까? 아무키나 입력후 엔터하거나 다음과 같은 명령어를 확인 후 입력해주세요"); // 계속 계산할 것인지 물어보기
             System.out.println(); // 줄바꿈용
-            System.out.println("remove: 리스트의 맨 앞에 있는 값 삭제, exit: 계산기 종료"); // remove와 exit 명령어 안내 메세지
+            System.out.println("remove: 리스트의 맨 앞에 있는 값 삭제, inquiry : 현재 리스트 전부 출력, exit: 계산기 종료"); // remove와 exit 명령어 안내 메세지
             String exit = sc.next(); // exit입력 했는지 확인하기 위해 String 변수에 저장
             // remove를 입력하면 리스트의 맨 앞에있는 값을 삭제합니다
             if (exit.equals("remove")) { // remove 스트링을 입력하면
@@ -97,12 +92,18 @@ public class App {
                     System.out.println("현재 리스트에 저장된 값 : " + list); // 현재 리스트에 저장된 값 출력
                     // 별도의 코드 추가없이도 아무키나 입력해도 계속 계산이 가능하도록 하기 위해 while문을 사용했어서 remove를 입력하면 계속 계산이 가능합니다.
                     // while문을 사용하지 않고 remove를 입력하면 계산이 종료되도록 하려면 remove를 입력한 후 break;를 통해 반복문을 탈출하면됩니다!
-
-                } else { // 리스트 배열에 값이 없을 경우
-                    System.out.println("삭제할 리스트 값이 없습니다."); // 값이 없다는 메세지 출력
                 }
-            } else
+
+            } else if (exit.equals("inquiry")) { // foreach를 사용해 inquiry를 입력하면
+                for (int i : list) { // 리스트 배열에 저장된 값을 불러오기 위해 foreach문을 사용해요 i : list는 리스트 배열에 저장된 값을 i에 저장을 의미
+                    System.out.print("기록된 리스트: "); // 리스트 배열에 저장된 값을 불러주기위한 메세지
+                    System.out.print(i + " "); // 리스트 배열에 저장된 값을 출력해요 빈 스트링은 띄어쓰기를 위해 사용해요
+                }
+                System.out.println(); // 줄바꿈용
+            }
+            else
             if (exit.equals("exit")) { // exit를 입력하면 앱을 종료
+                System.out.println("계산기를 종료합니다."); // 종료 메세지 출력
                 break; // 탈출!!!!
             }
         }
