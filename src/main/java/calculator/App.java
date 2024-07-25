@@ -6,12 +6,15 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+        // 연산 결과 10개를 저장할 수 있는 배열을 선언하고 연산의 결과를 저장합니다.
+        // 인덱스 0 번부터이기 떄문에 9까지 배열을 생성합니다.
+        int[] arr = new int[9];
         // 무한 루프를 사용하여 빠져 나올 떄까지 계속 계산
         while (true) {
             // Scanner를 통하여 콘솔로부터 입력을 받습니다.
             Scanner sc = new Scanner(System.in);
 
-            // ! = 부정 , sc.hasNextInt() = 입력받은 값이 정수인지
+            // ! = 부정하다 , sc.hasNextInt() = 입력받은 값이 정수인지
             // 콘솔에 정수가 아닌 입력을 받았을 때 오류 메시지를 출력하고 다시 입력받습니다.
             // 첫 번째 숫자 입력
             System.out.print("첫 번째 숫자 입력: ");
@@ -61,7 +64,21 @@ public class App {
             }
 
             if (error == 0) {
-                System.out.println("결과 : " + result);
+                // 연산 결과를 배열에 저장
+                for (int i = 0; i < arr.length; i++) {
+                    if (arr[i] != 0) {
+                        System.out.print("인덱스" + "[" + i + "]" + "번" + " 저장 값: " + arr[i] + " ");
+                    }
+                }
+                // 저장된 배열을 불러옴
+                for (int i = 0; i < arr.length; i++) {
+                    if (arr[i] == 0) {
+                        arr[i] = result;
+                        System.out.println("새로 배열에 저정된 값: " + arr[i]);
+                        break;
+                    }
+                }
+                System.out.println("결과: " + result);
                 System.out.println("더 계산하시겠습니까? 아무키나 입력 (exit 입력 시 종료)");
                 String exit = sc.next();
                 //  if (exit.equals("exit")) -> 입력받은 문자열이 "exit"인 경우 종료합니다.
