@@ -37,6 +37,25 @@ public class Calculator { // Calculator 클래스를 생성
         return result; // 연산 결과를 반환합니다.
     }
 
+    // 요구사항을 구현하기 app 클래스의 메인에서 사용할수있는 리스트 맨 앞의 값을 삭제하는 메서드를 추가
+    public void removeFirstList() { //
+        // public void public void removeFirstList() { //() { // 반환 타입 : void ,     public void removeFirstList() { // = 리스트 배열의 맨 앞의 값을 삭제 , 매개변수 : 없음 ,
+        // 반환 값 : 없음 , 반환값과 매개변수가 없는 이유는 리스트 배열의 맨 앞의 값을 삭제하기만 하기 때문입니다.
+        //매개변수란 메서드를 호출할 때 전달하는 값입니다.
+        // 이 경우에는 호출을 할 때 전달하는 값이 없기 때문에 매개변수가 없습니다.
+        if (!list.isEmpty()) { // 조건 : 리스트 배열에 저장된 값이 없는 경우가 아닌 경우, !가 부정을 의미하기 떄문에 리스트 배열에 저장된 값이 있는 경우입니다.
+            // isEmpty()는 리스트 배열이 비어있는지 확인하는 메서드 엠티 = 비어있다 = !부정.리스트.비어있다 리스트가 비어있는지에 대한 조건
+            System.out.println("리스트 배열의 맨 앞의 값이 삭제되었습니다. 삭제된 값 : " + list.get(0)); // 리스트 배열의 맨 앞의 값이 삭제된 경우
+            list.remove(0); // 리스트 배열에 저장된 맨 앞의 값을 삭제합니다.
+            // 만약 리스트 맨 앞의값이 아닌 다른값을 삭제시키고 싶다면 list.remove(0)을 list.remove(1)로 변경
+            // 즉, 안에 숫자는 인덱스를 의미합니다.
+            System.out.println("현재 리스트 배열에 저장된 값: " + list); // 리스트 배열에 저장된 값을 출력합니다.
+        }
+        else {
+            System.out.println("리스트 배열에 저장된 값이 없습니다!!!"); // 리스트 배열에 저장된 값이 없는 경우
+        }
+    }
+
     public ArrayList<Integer> getList() {
         // 요구사항을 만족하기 간접 접근을 통해 필그에 접근하여ㅑ 가져 올 수 있도록 구현하기 위해서 getter를 사용하여 리스트 배열을 가져옴
         // public ArrayList<Integer> getList() { // 반환 타입 : ArrayList<Integer> , getlist = 리스트 배열을 가져옴 , 반환 값 : list 배열
@@ -48,9 +67,14 @@ public class Calculator { // Calculator 클래스를 생성
         // 요구사항을 만족하기 간접 접근을 통해 필드에 접근하여 변경할 수 있도록 구현하기 위해서 setter를 사용하여 리스트 배열을 변경
         // public void setList(ArrayList<Integer> list) { // 반환 타입 : void , setList = 리스트 배열을 변경 , 매개변수 : list 배열
         // 반환 값 : 없음 번환 값이 없는 이유는 리스트 배열을 변경하기만 하기 때문입니다.
+        // integer = 정수 데이터를 저장하는 변수 타입 int와 차이점은 int는 기본 데이터 타입이고 integer는 참조 데이터 타입입니다.
+        //참조 데이터는 객체를 참조하는 데이터 타입이고 객체를 참조하는 데이터 타입이기 때문에 객체를 생성해야 사용할 수 있습니다.
+        // 즉 , int는 객체를 생성하지 않아도 사용할 수 있지만 integer는 객체를 생성해야 사용할 수 있습니다.
         this.list = list; // 리스트 배열을 변경합니다.
         // app에서 사용시 list.remove(0)을 사용하여 리스트 배열에 저장된 0,1,2,3과같은 수를 입력하여 인덱스 값에 따라 삭제할 수 있습니다.
     }
+
+// 배열을 변경하고 적용하기위해 removeFirstList()를 먼저 호출하고 setList()를 호출하여 변경된 리스트 배열을 가져옵니다.
 
 }
 

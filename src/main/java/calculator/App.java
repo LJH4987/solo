@@ -17,7 +17,9 @@ public class App {
         Calculator calculator = new Calculator(); // 해석하면  Calculator calculator = new Calculator(); -> calculator 클래스사용을 위한 새로운 객체를 생성합니다.
         // 해당 객체를 통해 Calculator 클래스의 메서드를 사용할 수 있습니다.
         // 이 코드가 없다면 Calculator 클래스의 메서드를 사용할 수 없습니다.
-        // 이러한 분리 작업을 통해 코드의 가독성을 높이고 유지보수를 용이하게 합니다.
+        // 이러한 분리 작업으로 캡슐화를 통해 코드의 보안성을 높이고 재사용성을 높이기 위함입니다.
+        // 객체 내부 상태를 외부에서 직접 접근하지 못하도록 하기 위해 private로 선언된 필드에 접근할 수 있도록 getter와 setter를 이용한 간접 접근을 통해 필드에 접근할 수 있습니다.
+        // 필드란 클래스 내부에 선언된 변수를 의미합니다.
         Scanner sc = new Scanner(System.in);
         //  Scanner sc = new Scanner(System.in); -> scanner sc는 콘솔창에서 입력받기 위한 스캐너 ,
         //  System.in은 키보드 입력을 의미 , new scanner은 새로운 스캐너 객체를 생성한다는 의미
@@ -54,22 +56,10 @@ public class App {
                 break;
             } else if (answer.equalsIgnoreCase("inquiry")) { // answer.equalsIgnoreCase("inquiry")로 입력받은 값이 inquiry인 경우 리스트 배열에 저장된 값을 조회합니다.
                 System.out.println("리스트 배열에 저장된 값: " + list);
-            } else if (answer.equals("remove")) {
-                if (!list.isEmpty()) { // = !list.isEmpty()를 통해 리스트 배열에 저장된 값이 없는 경우,
-                    // isEmpty()는 리스트 배열이 비어있는지 확인하는 메서드 엠티 = 비어있다 = !부정.리스트.비어있다 리스트가 비어있는지에 대한 조건
-                    System.out.println("리스트 배열에 저장된 값: " + list.get(0) + " 가 삭제되었습니다.");
-                    list.remove(0); // 리스트 배열에 저장된 맨 앞의 값을 삭제합니다.
-                    // 만약 리스트 맨 앞의값이 아닌 다른값을 삭제시키고 싶다면 list.remove(0)을 list.remove(1)로 변경하면 됩니다.
-                    // 즉, 안에 숫자는 인덱스를 의미합니다.
-                    calculator.setList(list); // setList 메서드를 통해 리스트 배열을 변경합니다.
-                    // 이코드가 없다면 리스트 배열에 저장된 값이 삭제되지 않습니다.
-                    // 이코드의 존재 이유는 list.remove(0)을 통해 리스트 배열에 맨 앞에 저장된 값을 삭제하고 변경된 리스트 배열을 가져오기 위함입니다.
-                    System.out.println("리스트 배열에 저장된 값: " + list);
-                } else {
-                    System.out.println("리스트 배열에 저장된 값이 없습니다.");
-                }
+            } else if (answer.equalsIgnoreCase("remove")) { // answer.equalsIgnoreCase("remove")로 입력받은 값이 remove인 경우 리스트 배열에 저장된 맨 앞의 값을 삭제합니다.
+                calculator.removeFirstList(); // removeFirstList 메서드를 호출하여 리스트 배열에 저장된 맨 앞의 값을 삭제합니다.
             }
-        }
+                }
         sc.close(); // 스캐너 종료가 맨 마지막에 있는 이유는 스캐너를 사용하고 난 뒤에는 반드시 닫아주어야 하기 때문입니다.
         // 닫아주지 않는다면 메모리 누수가 발생할 수 있습니다. 이런 방식의 메모리 누수는 프로그램이 종료될 때까지 계속해서 누적되어 쌓이게 됩니다.
         // 즉, 루트 밖에 마지막에 스캐너 종료가 맨 마지막에 있는 이유는 스캐너를 사용 한 후 리소스를 반환하여 메모리 누수를 방지하기 위함입니다.
