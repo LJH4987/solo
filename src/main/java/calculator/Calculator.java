@@ -34,6 +34,7 @@ public class Calculator { // Calculator 클래스를 생성
         return result; // 연산 결과를 반환합니다.
     }
 
+    /*
     // 테스트를 위한 main 메서드
     public static void main(String[] args) { // 이렇게 작성해서 테스트한걸 기준으로 App에 적용할 예정입니다
         Calculator calculator = new Calculator(); // Calculator 객체를 생성
@@ -57,6 +58,6 @@ public class Calculator { // Calculator 클래스를 생성
         }
 
         System.out.println("리스트 배열에 저장된 값: " + list); // 리스트 배열에 저장된 값 출력
-    }
+    } */
 }
 
