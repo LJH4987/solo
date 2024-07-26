@@ -8,6 +8,9 @@ public class Calculator { // Calculator 클래스를 생성
 
     // 사칙연산 메서드
     public int calculate(int num1, int num2, char operator) { // 반환 타입은 int로 설정하고 매개변수로 num1, num2, operator(연산자)를 받습니다.
+        // private로 선언하는 이유는 다른 클래스에서 접근하지 못하도록 하기 위함입니다.
+        // 다른 클래스에서 접근하지 못하도록 한다면 getter와 setter를 사용하여 간접 접근을 통해 필드에 접근할 수 있도록 구현할 수 있습니다.
+        // 그래서하단에 getter와 setter를 추가해줍니다.
         int result = 0; // 연산 후 값을 저장할 변수
         // 요구사항에 맞게 throw로 예외처리를 해주기위해 error 변수는 필요없어요
 
@@ -30,34 +33,24 @@ public class Calculator { // Calculator 클래스를 생성
             // IllegalArgumentException : 잘못된 인수를 전달했을 때 발생하는 예외처리 클래스
         }
 
-        list.add(result); // 연산 결과를 리스트 배열에 저장합니다.
+        list.add(result); // 연산 결과를 리스트 배열에 저장합니다. list.add(result)를 사용 시 다른 클래스에서도 list 배열에 저장된 값을 가져올 수 있습니다.
         return result; // 연산 결과를 반환합니다.
     }
 
-    /*
-    // 테스트를 위한 main 메서드
-    public static void main(String[] args) { // 이렇게 작성해서 테스트한걸 기준으로 App에 적용할 예정입니다
-        Calculator calculator = new Calculator(); // Calculator 객체를 생성
+    public ArrayList<Integer> getList() {
+        // 요구사항을 만족하기 간접 접근을 통해 필그에 접근하여ㅑ 가져 올 수 있도록 구현하기 위해서 getter를 사용하여 리스트 배열을 가져옴
+        // public ArrayList<Integer> getList() { // 반환 타입 : ArrayList<Integer> , getlist = 리스트 배열을 가져옴 , 반환 값 : list 배열
+        //app에서 사용 시 list.add(result)를 사용하여 리스트 배열에 저장된 연산 결과 값을 가져올 수 있습니다.
+        return list; // 리스트 배열을 반환합니다.
+    }
 
-        // calculate 메서드를 통해 계산 결과를 출력합니다.
-        try {
-            System.out.println("덧샘: " + calculator.calculate(5, 5, '+')); // calculate.calculate를 통해 계산 결과를 콘솔에 출력합니다.
-            System.out.println("뺄샘: " + calculator.calculate(5, 5, '-'));
-            System.out.println("곱샘: " + calculator.calculate(5, 5, '*'));
-            System.out.println("나눗샘: " + calculator.calculate(9, 3, '/'));
-            System.out.println("에러나눗샘: " + calculator.calculate(10, 0, '/'));
+    public void setList (ArrayList<Integer> list) {
+        // 요구사항을 만족하기 간접 접근을 통해 필드에 접근하여 변경할 수 있도록 구현하기 위해서 setter를 사용하여 리스트 배열을 변경
+        // public void setList(ArrayList<Integer> list) { // 반환 타입 : void , setList = 리스트 배열을 변경 , 매개변수 : list 배열
+        // 반환 값 : 없음 번환 값이 없는 이유는 리스트 배열을 변경하기만 하기 때문입니다.
+        this.list = list; // 리스트 배열을 변경합니다.
+        // app에서 사용시 list.remove(0)을 사용하여 리스트 배열에 저장된 0,1,2,3과같은 수를 입력하여 인덱스 값에 따라 삭제할 수 있습니다.
+    }
 
-        } catch (ArithmeticException e) {
-            System.out.println("예러 발생 : " + e.getMessage()); // getMessage() 메서드를 통해 throw한 메세지를 가져와서 에러메세지를 출력!!
-        }
-
-        try {
-            System.out.println("이상한놈 : " + calculator.calculate(5, 5, 'ㅋ')); // 입력한게 사칙연산자가 아닌경우 예외처리 테스트
-        } catch (IllegalArgumentException e) {
-            System.out.println("예외 발생 : " + e.getMessage()); // IllegalArgumentException을 잡아 처리
-        }
-
-        System.out.println("리스트 배열에 저장된 값: " + list); // 리스트 배열에 저장된 값 출력
-    } */
 }
 
