@@ -56,6 +56,18 @@ public class Calculator { // Calculator 클래스를 생성
         }
     }
 
+    public void inquiryList() { // 리스트 배열에 저장된 값을 조회하는 메서드를 추가
+        // public void inquiryList() { // 반환 타입 : void , inquiryList = 리스트 배열에 저장된 값을 조회 , 매개변수 : 없음 ,
+        // 반환 값 : 없음 , 반환값과 매개변수가 없는 이유는 리스트 배열에 저장된 값을 조회하기만 하기 때문입니다.
+        if (!list.isEmpty()) { // 조건 : 리스트 배열에 저장된 값이 없는 경우가 아닌 경우, !가 부정을 의미하기 떄문에 리스트 배열에 저장된 값이 있는 경우입니다.
+            // isEmpty()는 리스트 배열이 비어있는지 확인하는 메서드 엠티 = 비어있다 = !부정.리스트.비어있다 리스트가 비어있는지에 대한 조건
+            System.out.println("리스트 배열에 저장된 값: " + list); // 리스트 배열에 저장된 값을 출력합니다.
+        }
+        else {
+            System.out.println("리스트 배열에 저장된 값이 없습니다!!!"); // 리스트 배열에 저장된 값이 없는 경우
+        }
+    }
+
     public ArrayList<Integer> getList() {
         // 요구사항을 만족하기 간접 접근을 통해 필그에 접근하여ㅑ 가져 올 수 있도록 구현하기 위해서 getter를 사용하여 리스트 배열을 가져옴
         // public ArrayList<Integer> getList() { // 반환 타입 : ArrayList<Integer> , getlist = 리스트 배열을 가져옴 , 반환 값 : list 배열

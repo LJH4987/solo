@@ -55,7 +55,7 @@ public class App {
                 //answer은 스트링이기 때문에 equals...()를 사용하여 비교할 수 있습니다.
                 break;
             } else if (answer.equalsIgnoreCase("inquiry")) { // answer.equalsIgnoreCase("inquiry")로 입력받은 값이 inquiry인 경우 리스트 배열에 저장된 값을 조회합니다.
-                System.out.println("리스트 배열에 저장된 값: " + list);
+                calculator.inquiryList(); // inquiryList 메서드를 호출하여 리스트 배열에 저장된 값을 조회합니다.
             } else if (answer.equalsIgnoreCase("remove")) { // answer.equalsIgnoreCase("remove")로 입력받은 값이 remove인 경우 리스트 배열에 저장된 맨 앞의 값을 삭제합니다.
                 calculator.removeFirstList(); // removeFirstList 메서드를 호출하여 리스트 배열에 저장된 맨 앞의 값을 삭제합니다.
             }
