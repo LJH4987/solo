@@ -4,7 +4,27 @@ import java.util.ArrayList;
 
 public class Calculator { // Calculator 클래스를 생성
 
-    private static ArrayList<Integer> list = new ArrayList<>(); // 임포트한 ArrayList를 사용하여 계산 결과를 저장할 리스트 배열을 생성합니다.
+    private ArrayList<Integer> list; // private로 선언된 리스트 배열을 생성합니다.
+    /* 생성자가 있기 때문에 static을 사용하지 않아도 됩니다.
+    * static은 클래스 변수로 클래스가 로딩될 때 메모리에 할당되고 프로그램이 종료될 때까지 메모리에 남아있는 변수를 사용합니다.
+    * 이전에는 static을 사용하여 메모리에 할당되어 프로그램이 종료될 때까지 메모리에 남아있는 변수를 사용했지만,
+    * 이번에는 생성자를 사용하여 객체를 생성하여 메모리에 할당하고 프로그램이 종료될 때 메모리에서 해제되는 방식을 사용합니다.
+    * 이 방법을 통해 보다 효율적인 메모리 사용이 가능합니다.
+    *  private ArrayList<Integer> list; = private로 선언하여 다른 클래스에서 접근하지 못하고 getter와 setter를 사용하여 간접 접근이 가능한 list 배열을 만듭니다.
+    * (요약 : static은 종료시에 메모리에 남지만 생성자는 종료시에 메모리에서 해제됩니다.)
+    */
+    public Calculator() { // 생성자 생성.
+        this.list = new ArrayList<>(); // 생성자를 통해 리스트 배열을 초기화합니다.
+        /* 생성자 = 클래스명과 돌일한 이름을 가지고 있는 객체이며 생성 시 호출되는 메서드로 객체를 초기화하는 역할을 합니다.
+        * 이렇게 생성자를 사용해 객체를 초기화하는 이유는 객체를 생성할 때 필드를 초기화하기 위함입니다.
+        * 생성자는 반환 타입이 없고 클래스명과 동일한 이름을 가지고 있습니다.
+        * 이런방식으로 필드를 초기화 한다면 다른 클래스에서도 필드를 가져와 사용할 수 있습니다.
+        * 다른 클래스 필드 가져오는 예시 : app에서 사용 시 list.add(result)를 사용하여 리스트 배열에 저장된 연산 결과 값을 가져올 수 있습니다.
+        * 이 생성자가 없다면 예시 : app에서 사용 시 list.add(result)를 사용하여 리스트 배열에 저장된 연산 결과 값을 가져올 수 없습니다.
+        * 시도할 경우 에러가 발생합니다.
+        */
+
+    }
 
     // 사칙연산 메서드
     public int calculate(int num1, int num2, char operator) { // 반환 타입은 int로 설정하고 매개변수로 num1, num2, operator(연산자)를 받습니다.
