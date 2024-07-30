@@ -5,105 +5,165 @@
 
 package calculator;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        CircleCalculator circleCalculator = new CircleCalculator();
         ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
+        CircleCalculator circleCalculator = new CircleCalculator();
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            System.out.println("원의 넓이를 구하려면 1번, 사칙연산을 하려면 2번을 입력하세요: ");
+            System.out.println("원의 넓이를 구하려면 1번, 사칙연산을 하려면 2번을 입력하세요:");
             int select = sc.nextInt();
-            int choice = 0;
-
-            if (select != 1 && select != 2) {
-                System.out.println("1번과 2번 중 하나만 입력해주세요!!");
-                continue;
-            }
 
             if (select == 1) {
-                choice = 1;
-                System.out.println("반지름을 입력하세요: ");
+                System.out.println("반지름을 입력하세요:");
                 double radius = sc.nextDouble();
                 double result = circleCalculator.calculateCircleArea(radius);
                 System.out.println("결과: " + result);
-            }
-
-            if (select == 2) {
-                choice = 2;
-                System.out.println("사칙연산을 시작합니다.");
-
-                System.out.println("첫 번째 숫자를 입력하세요: ");
+            } else if (select == 2) {
+                System.out.println("첫 번째 숫자를 입력하세요:");
                 double num1 = sc.nextDouble();
-
-                System.out.println("두 번째 숫자를 입력하세요: ");
+                System.out.println("두 번째 숫자를 입력하세요:");
                 double num2 = sc.nextDouble();
-
-                System.out.println("사칙연산자를 입력하세요: ");
+                System.out.println("사칙연산자를 입력하세요 (+, -, *, /, %):");
                 char operator = sc.next().charAt(0);
 
                 try {
                     double result = arithmeticCalculator.calculate(num1, num2, operator);
                     System.out.println("결과: " + result);
-                } catch (ArithmeticException e) {
-                    System.out.println("에러 발생: " + e.getMessage());
                 } catch (IllegalArgumentException e) {
                     System.out.println("에러 발생: " + e.getMessage());
                 }
             }
 
-            if (choice == 1) {
-                ArrayList<Double> list = circleCalculator.getCircleArea();
-                System.out.println("리스트 배열에 저장된 값: " + list);
+            System.out.println("계속하려면 아무 키나 누르세요. 종료하려면 exit를 입력하세요:");
+            String answer = sc.next();
+            if (answer.equalsIgnoreCase("exit")) {
+                break;
+            } else {
+                System.out.println("명령어를 입력하세요 아무키나 누르면 첫 계산으로 돌아갑니다. (조회: inquiry, 리스트 맨 앞 삭제: remove, 리스트 배열 추가: newlist, 리스트 초기화: setlist):");
+                String command = sc.next();
 
-                System.out.println("더 계산하시겠습니까? 아무키나 입력해주세요 (exit 입력 시 종료, inquiry 입력 시 조회, remove 입력 시 맨 앞리스트만 삭제 newlist 입력 시 리스트 배열 추가): ");
-                String answer = sc.next();
+                switch (command.toLowerCase()) {
+                    case "inquiry":
+                        System.out.println("어떤 리스트를 조회하시겠습니까? (arithmetic: 사칙연산 결과, circle: 원의 넓이 결과):");
+                        String listType = sc.next();
+                        if (listType.equalsIgnoreCase("arithmetic")) {
+                            System.out.println("조회 조건을 입력하세요 (all: 모든 결과, greater: 값보다 큰 결과, range: 범위 내 결과, equal: 값과 같은 결과, less: 값보다 작은 결과):");
+                            String queryType = sc.next();
+                            if (queryType.equalsIgnoreCase("all")) {
+                                arithmeticCalculator.inquiryList();
+                            } else {
+                                System.out.println("기준 값을 입력하세요:");
+                                double value = sc.nextDouble();
 
-                if (answer.equalsIgnoreCase("exit")) {
-                    break;
-                } else if (answer.equalsIgnoreCase("inquiry")) {
-                    circleCalculator.inquiryCircleArea();
-                } else if (answer.equalsIgnoreCase("remove")) {
-                    circleCalculator.removeFirstCircleArea();
-                } else if (answer.equalsIgnoreCase("newlist")) {
-                    ArrayList<Double> newCircleAreas = new ArrayList<>();
-                    System.out.println("새로운 원의 넓이 리스트를 입력하세요 (끝내려면 exit 입력): ");
-                    while (true) {
-                        String endlist = sc.next();
-                        if (endlist.equalsIgnoreCase("exit")) break;
-                        newCircleAreas.add(Double.parseDouble(endlist));
-                    }
-                    circleCalculator.setCircleArea(newCircleAreas);
-                    System.out.println("새로운 원의 넓이 리스트가 저장된 값: " + newCircleAreas);
-                }
-            }
-
-            if (choice == 2) {
-                ArrayList<Double> list = arithmeticCalculator.getList();
-                System.out.println("리스트 배열에 저장된 값: " + list);
-
-                System.out.println("더 계산하시겠습니까? 아무키나 입력해주세요 (exit 입력 시 종료, inquiry 입력 시 조회, remove 입력 시 맨 앞리스트만 삭제, newlist 입력 시 리스트 배열 추가): ");
-                String answer = sc.next();
-
-                if (answer.equalsIgnoreCase("exit")) {
-                    break;
-                } else if (answer.equalsIgnoreCase("inquiry")) {
-                    arithmeticCalculator.inquiryList();
-                } else if (answer.equalsIgnoreCase("remove")) {
-                    arithmeticCalculator.removeFirstList();
-                } else if (answer.equalsIgnoreCase("newlist")) {
-                    ArrayList<Double> newList = new ArrayList<>();
-                    System.out.println("새로운 리스트를 입력하세요 (끝내려면 exit 입력): ");
-                    while (true) {
-                        String endlist = sc.next();
-                        if (endlist.equalsIgnoreCase("exit")) break;
-                        newList.add(Double.parseDouble(endlist));
-                    }
-                    arithmeticCalculator.setList(newList);
-                    System.out.println("새로운 리스트가 저장된 값: " + newList);
+                                switch (queryType.toLowerCase()) {
+                                    case "greater":
+                                        System.out.println("조회 결과: " + arithmeticCalculator.findResultsGreaterThan(value));
+                                        break;
+                                    case "range":
+                                        System.out.println("최소 값을 입력하세요:");
+                                        double min = sc.nextDouble();
+                                        System.out.println("최대 값을 입력하세요:");
+                                        double max = sc.nextDouble();
+                                        System.out.println("조회 결과: " + arithmeticCalculator.findResultsInRange(min, max));
+                                        break;
+                                    case "equal":
+                                        System.out.println("조회 결과: " + arithmeticCalculator.findResultsEqualTo(value));
+                                        break;
+                                    case "less":
+                                        System.out.println("조회 결과: " + arithmeticCalculator.findResultsLessThan(value));
+                                        break;
+                                    default:
+                                        System.out.println("잘못된 조회 조건입니다.");
+                                }
+                            }
+                        } else if (listType.equalsIgnoreCase("circle")) {
+                            circleCalculator.inquiryCircleAreaList();
+                        } else {
+                            System.out.println("잘못된 리스트 타입입니다.");
+                        }
+                        break;
+                    case "remove":
+                        System.out.println("어떤 리스트의 맨 앞 값을 삭제하시겠습니까? (arithmetic: 사칙연산 결과, circle: 원의 넓이 결과):");
+                        String removeType = sc.next();
+                        if (removeType.equalsIgnoreCase("arithmetic")) {
+                            arithmeticCalculator.removeFirstList();
+                        } else if (removeType.equalsIgnoreCase("circle")) {
+                            circleCalculator.removeFirstCircleArea();
+                        } else {
+                            System.out.println("잘못된 리스트 타입입니다.");
+                        }
+                        break;
+                    case "newlist":
+                        System.out.println("어떤 리스트에 값을 추가하시겠습니까? (arithmetic: 사칙연산 결과, circle: 원의 넓이 결과):");
+                        String newListType = sc.next();
+                        if (newListType.equalsIgnoreCase("arithmetic")) {
+                            System.out.println("새로운 값을 추가하세요. 끝내려면 'exit'을 입력하세요.");
+                            while (true) {
+                                String newValue = sc.next();
+                                if (newValue.equalsIgnoreCase("exit")) {
+                                    break;
+                                }
+                                try {
+                                    double valueToAdd = Double.parseDouble(newValue);
+                                    arithmeticCalculator.getList().add(valueToAdd);
+                                    System.out.println("값이 추가되었습니다.");
+                                } catch (NumberFormatException e) {
+                                    System.out.println("유효한 숫자를 입력해주세요!!");
+                                }
+                            }
+                        } else if (newListType.equalsIgnoreCase("circle")) {
+                            System.out.println("새로운 값을 추가하세요. 끝내려면 'exit'을 입력하세요.");
+                            while (true) {
+                                String newValue = sc.next();
+                                if (newValue.equalsIgnoreCase("exit")) {
+                                    break;
+                                }
+                                try {
+                                    double valueToAdd = Double.parseDouble(newValue);
+                                    circleCalculator.getCircleAreaList().add(valueToAdd);
+                                    System.out.println("값이 추가되었습니다.");
+                                } catch (NumberFormatException e) {
+                                    System.out.println("유효한 숫자를 입력해주세요!!");
+                                }
+                            }
+                        } else {
+                            System.out.println("잘못된 리스트 타입입니다.");
+                        }
+                        break;
+                    case "setlist":
+                        System.out.println("어떤 리스트를 초기화하시겠습니까? (arithmetic: 사칙연산 결과, circle: 원의 넓이 결과):");
+                        String setListType = sc.next();
+                        if (setListType.equalsIgnoreCase("arithmetic")) {
+                            System.out.println("정말 초기화 하시겠습니까? 취소하려면 아무키나 누르고 정말 초기화할꺼면 exit를 누르세요:");
+                            String confirmation = sc.next();
+                            if (confirmation.equalsIgnoreCase("exit")) {
+                                arithmeticCalculator.setList(new ArrayList<>());
+                                System.out.println("리스트가 초기화되었습니다.");
+                                System.out.println("현재 리스트 배열에 저장된 값 : " + arithmeticCalculator.getList());
+                            } else {
+                                System.out.println("리스트 초기화가 취소되었습니다.");
+                            }
+                        } else if (setListType.equalsIgnoreCase("circle")) {
+                            System.out.println("정말 초기화 하시겠습니까? 취소하려면 아무키나 누르고 정말 초기화할꺼면 exit를 누르세요:");
+                            String confirmation = sc.next();
+                            if (confirmation.equalsIgnoreCase("exit")) {
+                                circleCalculator.setCircleAreaList(new ArrayList<>());
+                                System.out.println("리스트가 초기화되었습니다.");
+                            } else {
+                                System.out.println("리스트 초기화가 취소되었습니다.");
+                                System.out.println("현재 리스트에 저장된 값 : " + circleCalculator.getCircleAreaList());
+                            }
+                        } else {
+                            System.out.println("잘못된 리스트 타입입니다.");
+                        }
+                        break;
+                    default:
+                        System.out.println("잘못된 명령어를 입력하셨습니다. 처음 계산으로 돌아갑니다.");
                 }
             }
         }
