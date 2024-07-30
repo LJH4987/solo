@@ -2,15 +2,20 @@
 
 package calculator;
 
-public class SubtractOperator implements Operator {
+public class SubtractOperator implements Operator<Number> {
     @Override
-    public boolean supports(OperatorType operator) {
-        return operator == OperatorType.SUBTRACT;
+    public boolean supports(char operator) {
+        return operator == '-';
     }
 
     @Override
-    public double apply(double num1, double num2) {
-        return num1 - num2;
+    public Number apply(Number num1, Number num2) {
+        if (num1 instanceof Double || num2 instanceof Double) {
+            return num1.doubleValue() - num2.doubleValue();
+        } else {
+            return num1.intValue() - num2.intValue();
+        }
     }
 }
+
 

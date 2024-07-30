@@ -2,18 +2,23 @@
 
 package calculator;
 
-public class ModOperator implements Operator {
+public class ModOperator implements Operator<Number> {
     @Override
-    public boolean supports(OperatorType operator) {
-        return operator == OperatorType.MOD;
+    public boolean supports(char operator) {
+        return operator == '%';
     }
 
     @Override
-    public double apply(double num1, double num2) {
-        if (num2 == 0) {
+    public Number apply(Number num1, Number num2) {
+        if (num2.doubleValue() == 0) {
             throw new ArithmeticException("0으로 나눌 수 없습니다!");
         }
-        return num1 % num2;
+        if (num1 instanceof Double || num2 instanceof Double) {
+            return num1.doubleValue() % num2.doubleValue();
+        } else {
+            return num1.intValue() % num2.intValue();
+        }
     }
 }
+
 
