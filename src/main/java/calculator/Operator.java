@@ -5,9 +5,10 @@
 package calculator;
 
 public interface Operator {
-    boolean supports(char operator);
+    boolean supports(OperatorType operator);
     double apply(double num1, double num2);
 }
+
 /*
 *이 코드는 Operator 인터페이스를 정의하며 supports 메서드와 apply 메서드를 선언합니다.
 * supports 메서드는 연산자를 받아 해당 연산자를 지원하는지 여부를 반환하고,

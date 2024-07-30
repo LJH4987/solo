@@ -4,12 +4,13 @@ package calculator;
 
 public class SubtractOperator implements Operator {
     @Override
-    public double apply(double num1, double num2) {
-        return num1 - num2;
+    public boolean supports(OperatorType operator) {
+        return operator == OperatorType.SUBTRACT;
     }
 
     @Override
-    public boolean supports(char operator) {
-        return operator == '-';
+    public double apply(double num1, double num2) {
+        return num1 - num2;
     }
 }
+

@@ -1,13 +1,17 @@
+// 곱하기를 담당하느 클래스
+
 package calculator;
 
 public class MultiplyOperator implements Operator {
     @Override
-    public double apply(double num1, double num2) {
-        return num1 * num2;
+    public boolean supports(OperatorType operator) {
+        return operator == OperatorType.MULTIPLY;
     }
 
     @Override
-    public boolean supports(char operator) {
-        return operator == '*';
+    public double apply(double num1, double num2) {
+        return num1 * num2;
     }
 }
+
+

@@ -3,10 +3,9 @@
 package calculator;
 
 public class DivideOperator implements Operator {
-
     @Override
-    public boolean supports(char operator) {
-        return operator == '/';
+    public boolean supports(OperatorType operator) {
+        return operator == OperatorType.DIVIDE;
     }
 
     @Override
@@ -17,3 +16,4 @@ public class DivideOperator implements Operator {
         return num1 / num2;
     }
 }
+

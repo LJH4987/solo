@@ -4,12 +4,16 @@ package calculator;
 
 public class ModOperator implements Operator {
     @Override
-    public double apply(double num1, double num2) {
-        return num1 % num2;
+    public boolean supports(OperatorType operator) {
+        return operator == OperatorType.MOD;
     }
 
     @Override
-    public boolean supports(char operator) {
-        return operator == '%';
+    public double apply(double num1, double num2) {
+        if (num2 == 0) {
+            throw new ArithmeticException("0으로 나눌 수 없습니다!");
+        }
+        return num1 % num2;
     }
 }
+
