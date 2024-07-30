@@ -3,12 +3,44 @@
 
 package calculator;
 
+import java.util.ArrayList;
+
 public class CircleCalculator extends Calculator {
-    private static final double PI = 3.14;
+    private ArrayList<Double> circleArea;
+
+    public CircleCalculator() {
+        this.circleArea = new ArrayList<>();
+    }
 
     public double calculateCircleArea(double radius) {
-        double area = PI * radius * radius;
-        list.add(area);
+        double area = Math.PI * radius * radius;
+        circleArea.add(area);
         return area;
+    }
+
+    public ArrayList<Double> getCircleArea() {
+        return circleArea;
+    }
+
+    public void setCircleArea(ArrayList<Double> circleArea) {
+        this.circleArea = circleArea;
+    }
+
+    public void inquiryCircleArea() {
+        if (!circleArea.isEmpty()) {
+            System.out.println("리스트 배열에 저장된 값 : " + circleArea);
+        } else {
+            System.out.println("리스트 배열에 저장된 값이 없습니다!!!");
+        }
+    }
+
+    public void removeFirstCircleArea() {
+        if (!circleArea.isEmpty()) {
+            System.out.println("리스트 배열의 맨 앞의 값이 삭제되었습니다. 삭제된 값 : " + circleArea.get(0));
+            circleArea.remove(0);
+            System.out.println("현재 리스트 배열에 저장된 값 : " + circleArea);
+        } else {
+            System.out.println("리스트 배열에 저장된 값이 없습니다!!!");
+        }
     }
 }
