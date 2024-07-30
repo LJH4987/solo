@@ -94,7 +94,7 @@ public class App {
                 ArrayList<Double> list = calculator.getCircleArea(); // getCircleArea 메서드로 배열을 가져옵니다 , 이렇게 한다면 다른 클래스에서도 list 배열을 가져올 수 있습니다.
                 System.out.println("리스트 배열에 저장된 값: " + list); // 리스트 배열에 저장된 값을 출력
 
-                System.out.println("더 계산하시겠습니까? 아무키나 입력해주세요 (exit 입력 시 종료 , inquiry 입력 시 조회 ,  remove 입력 시 맨 앞리스트만 삭제) : ");
+                System.out.println("더 계산하시겠습니까? 아무키나 입력해주세요 (exit 입력 시 종료 , inquiry 입력 시 조회 ,  remove 입력 시 맨 앞리스트만 삭제 newlist 입력 시 리스트 배열 추가) : ");
                 String answer = sc.next(); //  스트링 answer에 스캐너로 입력받은 값을 저장
                 // 명령어가 아닌 아무키나 입력받는다면 계속해서 계산합니다
 
@@ -104,6 +104,16 @@ public class App {
                     calculator.inquiryCircleArea(); // inquiryCircleArea 메서드를 호출하여 리스트 배열에 저장된 값을 조회합니다.
                 } else if (answer.equalsIgnoreCase("remove")) { // answer.equalsIgnoreCase("remove")로 입력받은 값이 remove인 경우 리스트 배열에 저장된 맨 앞의 값을 삭제합니다.
                     calculator.removeFirstCircleArea(); // removeFirstCircleArea 메서드를 호출하여 리스트 배열에 저장된 맨 앞의 값을 삭제합니다.
+                } else if (answer.equalsIgnoreCase("newlist")) {
+                    ArrayList<Double> newCircleAreas = new ArrayList<>();
+                    System.out.println("새로운 원의 넓이 리스트를 입력하세요 (끝내려면 exit 입력): ");
+                    while (true) { // while문을 사용하여 무한 반복을 실행합니다.
+                        String endlist = sc.next(); // 스캐너로 입력받은 값을 endlist에 저장
+                        if (endlist.equalsIgnoreCase("exit")) break; // endlist에 입력받은 값이 exit인 경우 반복문을 종료합니다.
+                        newCircleAreas.add(Double.parseDouble(endlist)); // endlist에 입력받은 값을 double로 변환하여 newCircleAreas에 추가합니다.
+                    }
+                    calculator.setCircleArea(newCircleAreas); // setCircleArea 메서드를 호출하여 리스트 배열에 저장된 값을 변경합니다.
+                    System.out.println("새로운 원의 넓이 리스트가 저장된 값 : " + newCircleAreas);
                 }
             } // if문 종료
 
@@ -111,7 +121,7 @@ public class App {
                 ArrayList<Integer> list = calculator.getList(); // getList 메서드로 배열을 가져옵니다 , 이렇게 한다면 다른 클래스에서도 list 배열을 가져올 수 있습니다.
                 System.out.println("리스트 배열에 저장된 값: " + list); // 리스트 배열에 저장된 값을 출력
 
-                System.out.println("더 계산하시겠습니까? 아무키나 입력해주세요 (exit 입력 시 종료 , inquiry 입력 시 조회 ,  remove 입력 시 맨 앞리스트만 삭제) : ");
+                System.out.println("더 계산하시겠습니까? 아무키나 입력해주세요 (exit 입력 시 종료 , inquiry 입력 시 조회 ,  remove 입력 시 맨 앞리스트만 삭제 , newlist 입력 시 리스트 배열 추가) : ");
                 String answer = sc.next(); //  스트링 answer에 스캐너로 입력받은 값을 저장
                 // 명령어가 아닌 아무키나 입력받는다면 계속해서 계산합니다
 
@@ -126,6 +136,16 @@ public class App {
                     calculator.inquiryList(); // inquiryList 메서드를 호출하여 리스트 배열에 저장된 값을 조회합니다.
                 } else if (answer.equalsIgnoreCase("remove")) { // answer.equalsIgnoreCase("remove")로 입력받은 값이 remove인 경우 리스트 배열에 저장된 맨 앞의 값을 삭제합니다.
                     calculator.removeFirstList(); // removeFirstList 메서드를 호출하여 리스트 배열에 저장된 맨 앞의 값을 삭제합니다.
+                } else if (answer.equalsIgnoreCase("newlist")) {
+                    ArrayList<Integer> newList = new ArrayList<>();
+                    System.out.println("새로운 리스트를 입력하세요 (끝내려면 exit 입력): ");
+                    while (true) {
+                        String endlist = sc.next();
+                        if (endlist.equalsIgnoreCase("exit")) break;
+                        newList.add(Integer.parseInt(endlist));
+                    }
+                    calculator.setList(newList);
+                    System.out.println("새로운 리스트가 저장된 값 : " + newList);
                 }
             } // if문 종료
 

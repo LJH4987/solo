@@ -87,7 +87,7 @@ public class Calculator { // Calculator 클래스를 생성
         return circleArea; // 원주율 배열을 반환합니다.
     }
 
-    public void setCircleArea(ArrayList<Double> circleArea) {
+    public void setCircleArea (ArrayList<Double> circleArea) {
         // 요구사항을 만족하기 간접 접근을 통해 필드에 접근하여 변경할 수 있도록 구현하기 위해서 setter를 사용하여 원주율 배열을 변경
         // public void setCircleArea(ArrayList<Double> circleArea) { // 반환 타입 : void , setCircleArea = 원주율 배열을 변경 , 매개변수 : circleArea 배열
         // 반환 값 : 없음 , 반환값이 없는 이유는 원주율 배열을 변경하기만 하기 때문입니다.
