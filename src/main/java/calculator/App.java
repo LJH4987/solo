@@ -1,8 +1,165 @@
-/*
- * 추가적인 클래스 구현을 통한 상속과 다형성 과정에서 공부하면서 작성한 주석떄문에 너무 코드가 복잡해보여져서
- * 주석을 제거 또는 최소화하고 코드를 간결하게 수정하였습니다.
- */
+// 현재 문제점 및 개선해야할 사항
+// 사칙연산 개산부터 구현하느라 원의 넓이 계산을 구현하지 못해, 별도의 버튼을 만들어서 원의 넓이 계산을 구현하는 등의 방식을 취해야할것같습니다.
+// 계산기의 버튼을 누를 때마다 버튼의 색상이 변하는데, 버튼을 누르고 떼었을 때 색상이 변하는 것이 아니라 버튼을 누르는 순간 색상이 변하도록 수정해야할 것으로 보입니다
+// 디스플레이창에 출력된 값이 너무 늘어나면 화면에 표시되지 않는 문제, 디스플레이창에 출력된 값이 일정 길이 이상이 되면 자동으로 줄어들도록 수정하거나 스크롤바, 혹은 입력 제한을 두는 방식 등등 고민해봐야할것같습니다.
+// 그 외에도 이전 레벨에 배열의 조회,추가,삭제 등 기능을 구현했던 것처럼 추가적인 버튼이나 다른 방법을 강구해서 구현해야할 것으로 보입니다.
+// 별도) 그 외 이전 레벨에서 숫자가 아닌 문자를 입력했을 때 일부 예외처리가 소홀하여 에러가 발생하는 문제가 있었는데, 마지막까지 콘솔에서 띄우는 방식이였다면 보완했어야했었습니다.
 
+
+package calculator;
+
+import javax.swing.*; // Swing 라이브러리를 통해 GUI 구현을 위한 import
+import java.awt.*; // AWT 라이브러리를 통해 GUI 구현을 위한 import
+import java.awt.event.ActionEvent; // ActionEvent 클래스를 사용하기 위한 import / 버튼 클릭 이벤트
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent; // MouseAdapter, MouseEvent 클래스를 사용하기 위한 import / 마우스 클릭 이벤트
+
+public class App {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            CalculatorApp app = new CalculatorApp();
+            app.setVisible(true);
+        });
+    }
+}
+
+class CalculatorApp extends JFrame {
+    private JTextField display;
+    private ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
+    private CircleCalculator circleCalculator = new CircleCalculator(); // 원의 넓이
+    private String operator = "";
+    private double num1, num2;
+
+    public CalculatorApp() {
+        setTitle("Calculator");
+        setSize(300, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false); // 크기 고정
+
+        display = new JTextField();
+        display.setBounds(1, 45, 288, 65);
+        display.setEditable(false);
+        display.setFont(new Font("Arial", Font.PLAIN, 24));
+        display.setHorizontalAlignment(SwingConstants.RIGHT);
+        display.setBackground(new Color(204, 220, 221)); // 배경색을 설정 (RGB: 204, 220, 221)
+        display.setForeground(new Color(0, 0, 0)); // 텍스트 색상을 설정 (RGB: 0, 0, 0)
+        add(display);
+
+        String[] buttonImages = {
+                "src/main/resources/img/7.png", "src/main/resources/img/8.png", "src/main/resources/img/9.png", "src/main/resources/img/C.png",
+                "src/main/resources/img/4.png", "src/main/resources/img/5.png", "src/main/resources/img/6.png", "src/main/resources/img/percent.png",
+                "src/main/resources/img/1.png", "src/main/resources/img/2.png", "src/main/resources/img/3.png", "src/main/resources/img/divide.png",
+                "src/main/resources/img/0.png", "src/main/resources/img/dot.png", "src/main/resources/img/equals.png", "src/main/resources/img/plus.png",
+                "src/main/resources/img/minus.png", "src/main/resources/img/multiply.png"
+        };
+
+        String[] buttonCommands = {
+                "7", "8", "9", "C",
+                "4", "5", "6", "%",
+                "1", "2", "3", "/",
+                "0", ".", "=", "+",
+                "-", "*"
+        };
+
+        int[] buttonX = {
+                30, 90, 150, 220,
+                30, 90, 150, 220,
+                30, 90, 150, 220,
+                30, 90, 150, 220,
+                220, 220
+        };
+
+        int[] buttonY = {
+                200, 200, 200, 170,
+                260, 260, 260, 220,
+                320, 320, 320, 260,
+                380, 380, 380, 320,
+                375, 420
+        };
+
+        JButton[] buttons = new JButton[buttonImages.length];
+
+        for (int i = 0; i < buttonImages.length; i++) {
+            buttons[i] = new JButton(new ImageIcon(buttonImages[i]));
+            buttons[i].setBounds(buttonX[i], buttonY[i], 50, 50);
+            buttons[i].setActionCommand(buttonCommands[i]);
+            buttons[i].setBorderPainted(false);
+            buttons[i].setContentAreaFilled(false);
+            buttons[i].setFocusPainted(false);
+            buttons[i].setOpaque(false);
+            buttons[i].addActionListener(new ButtonClickListener());
+
+
+            final int index = i;
+            buttons[i].addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    buttons[index].setBackground(Color.LIGHT_GRAY);
+                    buttons[index].setOpaque(true);
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    buttons[index].setBackground(null);
+                    buttons[index].setOpaque(false);
+                }
+            });
+
+            add(buttons[i]);
+        }
+
+        JLabel background = new JLabel(new ImageIcon("src/main/resources/img/background.png"));
+        background.setBounds(0, 0, 300, 500);
+        add(background);
+    }
+
+    private class ButtonClickListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String command = e.getActionCommand();
+            if (command.isEmpty()) {
+                return;
+            }
+            if (command.charAt(0) == 'C') {
+                display.setText("");
+                operator = "";
+                num1 = num2 = 0;
+            } else if (command.charAt(0) == '=') {
+                num2 = Double.parseDouble(display.getText());
+                double result = 0;
+                switch (operator) {
+                    case "+":
+                        result = arithmeticCalculator.calculate(num1, num2, '+');
+                        break;
+                    case "-":
+                        result = arithmeticCalculator.calculate(num1, num2, '-');
+                        break;
+                    case "*":
+                        result = arithmeticCalculator.calculate(num1, num2, '*');
+                        break;
+                    case "/":
+                        result = arithmeticCalculator.calculate(num1, num2, '/');
+                        break;
+                    case "%":
+                        result = arithmeticCalculator.calculate(num1, num2, '%');
+                        break;
+                }
+                display.setText("" + result);
+                operator = "";
+                num1 = num2 = 0;
+            } else if (command.equals("+") || command.equals("-") || command.equals("*") || command.equals("/") || command.equals("%")) {
+                num1 = Double.parseDouble(display.getText());
+                operator = command;
+                display.setText("");
+            } else {
+                display.setText(display.getText() + command);
+            }
+        }
+    }
+}
+
+/*
 package calculator;
 
 import java.util.ArrayList;
@@ -171,3 +328,4 @@ public class App {
         sc.close();
     }
 }
+*/
